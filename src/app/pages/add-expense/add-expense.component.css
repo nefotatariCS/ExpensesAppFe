@@ -1,0 +1,39 @@
+.form-container {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.form-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.form-group {
+  flex: 1;
+  margin-right: 10px;
+}
+
+label {
+  font-family: Arial, sans-serif;
+  font-weight: bold;
+  margin-right: 10px;
+  display: inline-block;
+  width: 150px;
+}
+
+button {
+  margin-top: 10px;
+}
+
+.alert {
+  margin-top: 10px;
+}
+
+.error-message {
+  color: red;
+  padding: 5px;
+  margin-top: 5px;
+  font-weight: bold;
+}

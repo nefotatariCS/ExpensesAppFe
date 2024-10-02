@@ -1,0 +1,35 @@
+<div class="card">
+  <h4 class="card-header py-3">Expeses Software</h4>
+  <div class="card-body">
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+      <div class="mb-3">
+        <label class="form-label" for="userName">Username </label>
+        <input
+          type="text"
+          formControlName="userName"
+          class="form-control"
+          ngClass="{ 'is-invalid': submitted && form.userName.errors }"
+        />
+      </div>
+      <div class="mb-3">
+        <label class="form-label" for="password">Password </label>
+        <input
+          type="password"
+          formControlName="password"
+          class="form-control"
+          ngClass="{ 'is-invalid': submitted && form.password.errors }"
+        />
+      </div>
+      <button [disabled]="loading" class="btn btn-primary">
+        <span
+          *ngIf="loading"
+          class="spinner-border spinner-border-sm mr-1"
+        ></span>
+        Login
+      </button>
+      <div></div>
+      <br />
+      <div *ngIf="error" class="alert alert-danger mt-3 mb-0">{{ error }}</div>
+    </form>
+  </div>
+</div>

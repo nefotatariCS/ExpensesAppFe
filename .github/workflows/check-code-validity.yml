@@ -1,0 +1,51 @@
+name: Prettier Formatting
+
+on:
+  push:
+permissions:
+  contents: write  # Allow write access to repository contents  
+jobs:
+  prettier:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "18"
+
+      - name: Install Dependencies
+        run: |
+          pwd
+          cd expenses-be
+          npm install
+
+      - name: Run Prettier
+        run: npx prettier --write .
+
+      - name: Install frontend dependencies
+        run: |
+          pwd
+          cd expenses-fe
+          npm install
+
+      - name: Install Angular CLI
+        run: |
+          npm install -g @angular/cli
+
+      - name: Check for changes
+        env:
+            GITHUB_TOKEN: ${{ secrets.WORKFLOW_TOKEN }}
+        run: |
+          git config --global user.name "GitHub Actions"
+          git config --global user.email "actions@github.com"
+          git add .
+          if git diff-index --quiet HEAD --; then
+            echo "No changes detected"
+          else
+            git commit -m "Apply Prettier formatting"
+            git push origin HEAD:$GITHUB_REF_NAME
+          fi

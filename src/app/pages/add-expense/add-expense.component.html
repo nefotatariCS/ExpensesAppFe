@@ -1,0 +1,107 @@
+<nav>
+  <p-button
+    styleClass="p-button-raised p-button-success"
+    routerLink="/dashboard"
+    >See All Expenses</p-button
+  >
+</nav>
+
+<div class="form-container">
+  <form [formGroup]="expenseForm" (ngSubmit)="onSubmit()">
+    <div class="form-row">
+      <div class="form-group">
+        <label for="name">Description</label>
+        <input
+          type="text"
+          pInputText
+          id="description"
+          formControlName="description"
+          [ngClass]="{
+            'is-invalid':
+              expenseForm.get('description')?.invalid &&
+              expenseForm.get('description')?.touched,
+          }"
+        />
+        <div
+          *ngIf="
+            expenseForm.get('description')?.invalid &&
+            expenseForm.get('description')?.touched
+          "
+          class="error-message"
+        >
+          Description is required
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="lastName">Currency</label>
+        <input
+          type="text"
+          pInputText
+          id="currency"
+          formControlName="currency"
+          [ngClass]="{
+            'is-invalid':
+              expenseForm.get('currency')?.invalid &&
+              expenseForm.get('currency')?.touched,
+          }"
+        />
+        <div
+          *ngIf="
+            expenseForm.get('currency')?.invalid &&
+            expenseForm.get('currency')?.touched
+          "
+          class="error-message"
+        >
+          Currency is required
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="name">Amount</label>
+        <input
+          type="text"
+          pInputText
+          id="amount"
+          formControlName="amount"
+          [ngClass]="{
+            'is-invalid':
+              expenseForm.get('amount')?.invalid &&
+              expenseForm.get('amount')?.touched,
+          }"
+        />
+        <div
+          *ngIf="
+            expenseForm.get('amount')?.invalid &&
+            expenseForm.get('amount')?.touched
+          "
+          class="error-message"
+        >
+          Amount is required
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="transactionDateLabel">Transaction Date </label><br />
+        <p-calendar
+          id="transactionDate"
+          formControlName="transactionDate"
+          [showIcon]="true"
+          [showButtonBar]="true"
+        ></p-calendar>
+        <div
+          *ngIf="
+            expenseForm.get('transactionDate')?.invalid &&
+            expenseForm.get('transactionDate')?.touched
+          "
+          class="error-message"
+        >
+          Transaction Date is required
+        </div>
+      </div>
+    </div>
+
+    <button pButton pRipple type="submit">Save</button>
+    <div *ngIf="error" class="error-message">{{ error }}</div>
+  </form>
+</div>

@@ -1,0 +1,27 @@
+<nav class="navbar navbar-expand navbar-dark bg-dark px-3" *ngIf="user">
+  <div class="navbar-nav">
+    <p-button
+      label="Dashboard"
+      styleClass="p-button-raised p-button-secondary mr-2"
+      routerLink="/dashboard"
+      routerLinkActive="active"
+    ></p-button>
+    <p-button
+      label="Users"
+      styleClass="p-button-raised p-button-secondary mr-2"
+      routerLink="/user"
+      routerLinkActive="active"
+    ></p-button>
+  </div>
+  <div class="logOutButton">
+    <p-button
+      [label]="'Logut '"
+      styleClass="p-button-danger"
+      (click)="logout()"
+    ></p-button>
+  </div>
+</nav>
+
+<div class="container">
+  <router-outlet></router-outlet>
+</div>

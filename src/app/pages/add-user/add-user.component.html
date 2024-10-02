@@ -1,0 +1,196 @@
+<nav>
+  <p-button styleClass="p-button-raised p-button-success" routerLink="/user"
+    >See All Users</p-button
+  >
+</nav>
+
+<div class="form-container">
+  <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+    <div class="form-row">
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input
+          type="text"
+          pInputText
+          id="name"
+          formControlName="name"
+          [ngClass]="{
+            'is-invalid':
+              userForm.get('name')?.invalid && userForm.get('name')?.touched,
+          }"
+        />
+        <div
+          *ngIf="userForm.get('name')?.invalid && userForm.get('name')?.touched"
+          class="error-message"
+        >
+          Name is required
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="lastName">Last Name</label>
+        <input
+          type="text"
+          pInputText
+          id="lastName"
+          formControlName="lastName"
+          [ngClass]="{
+            'is-invalid':
+              userForm.get('lastName')?.invalid &&
+              userForm.get('lastName')?.touched,
+          }"
+        />
+        <div
+          *ngIf="
+            userForm.get('lastName')?.invalid &&
+            userForm.get('lastName')?.touched
+          "
+          class="error-message"
+        >
+          Last Name is required
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="companyName">User Name</label>
+        <input
+          type="text"
+          pInputText
+          id="userName"
+          formControlName="userName"
+          [ngClass]="{
+            'is-invalid':
+              userForm.get('userName')?.invalid &&
+              userForm.get('userName')?.touched,
+          }"
+        />
+        <div
+          *ngIf="
+            userForm.get('userName')?.invalid &&
+            userForm.get('userName')?.touched
+          "
+          class="error-message"
+        >
+          UserName is required
+        </div>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label for="email2">Password</label>
+        <input
+          type="text"
+          pInputText
+          id="password"
+          formControlName="password"
+          [ngClass]="{
+            'is-invalid':
+              userForm.get('password')?.invalid &&
+              userForm.get('password')?.touched,
+          }"
+        />
+        <div
+          *ngIf="
+            userForm.get('password')?.invalid &&
+            userForm.get('password')?.touched
+          "
+          class="error-message"
+        >
+          Password is required
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="state">Email</label>
+        <input
+          type="text"
+          pInputText
+          id="email"
+          formControlName="email"
+          [ngClass]="{
+            'is-invalid':
+              userForm.get('email')?.invalid && userForm.get('email')?.touched,
+          }"
+        />
+        <div
+          *ngIf="
+            userForm.get('email')?.invalid && userForm.get('email')?.touched
+          "
+          class="error-message"
+        >
+          Check the Email
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="city">Phone Number</label>
+        <input
+          type="text"
+          pInputText
+          id="phoneNumber"
+          formControlName="phoneNumber"
+          [ngClass]="{
+            'is-invalid':
+              userForm.get('phoneNumber')?.invalid &&
+              userForm.get('phoneNumber')?.touched,
+          }"
+        />
+        <div
+          *ngIf="
+            userForm.get('phoneNumber')?.invalid &&
+            userForm.get('phoneNumber')?.touched
+          "
+          class="error-message"
+        >
+          Check the Phone Number
+        </div>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label for="tel1">Gender</label>
+        <p-dropdown
+          [options]="genderOptions"
+          formControlName="gender"
+          optionLabel="name"
+          [ngClass]="{
+            'is-invalid':
+              userForm.get('gender')?.invalid &&
+              userForm.get('gender')?.touched,
+          }"
+        ></p-dropdown>
+        <div
+          *ngIf="
+            userForm.get('gender')?.invalid && userForm.get('gender')?.touched
+          "
+          class="error-message"
+        >
+          Gender is required
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="role">Role</label>
+        <p-dropdown
+          formControlName="userRole"
+          [options]="allUserRoles"
+          optionLabel="userRoleDescription"
+        ></p-dropdown>
+        <div
+          *ngIf="
+            userForm.get('userRole')?.invalid &&
+            userForm.get('userRole')?.touched
+          "
+          class="error-message"
+        >
+          User Role is required
+        </div>
+      </div>
+    </div>
+
+    <button pButton pRipple type="submit">Save User</button>
+    <div *ngIf="error" class="error-message">{{ error }}</div>
+  </form>
+</div>

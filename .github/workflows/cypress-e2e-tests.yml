@@ -1,0 +1,103 @@
+name: Cypress Tests
+
+on:
+  workflow_run:
+    workflows: ["Run Unit Tests"]  
+    types:
+      - completed
+
+jobs:
+  cypress-tests:
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}  # Only run if unit tests are successful
+    runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: postgres:latest
+        ports:
+          - 5432:5432
+        env:
+          POSTGRES_DB: ExpensesApp
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: mypassword
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Wait for Postgres to be ready
+        run: |
+          until pg_isready -h localhost -p 5432 -U postgres; do
+            echo "Waiting for Postgres..."
+            sleep 2
+          done
+
+      - name: Restore database
+        run: |
+          pg_restore -U postgres -d ExpensesApp -h localhost -p 5432 --clean --if-exists -v ExpensesAppDatabase.sql
+        env:
+          PGPASSWORD: mypassword
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: "18"
+
+      - name: Install backend dependencies
+        run: |
+          cd expenses-be
+          npm install
+
+      - name: Start backend server
+        run: |
+          cd expenses-be
+          npm start &
+        env:
+          DATABASE_URL: postgresql://postgres:mypassword@localhost:5432/ExpensesApp
+
+      - name: Wait for backend to be ready
+        run: sleep 30
+
+      - name: Install frontend dependencies
+        run: |
+          cd expenses-fe
+          npm install
+
+      - name: Install Angular CLI
+        run: |
+          npm install -g @angular/cli
+
+      - name: Start frontend server
+        run: |
+          cd expenses-fe
+          nohup ng serve --port 4200 &
+        env:
+          BACKEND_URL: http://localhost:3000
+
+      - name: Wait for frontend to be ready
+        run: |
+          echo "Waiting for frontend to be ready on http://localhost:4200..."
+          until curl -s http://localhost:4200 | grep -q "<title>"; do
+            echo "Still waiting..."
+            sleep 5
+          done
+          echo "Frontend is up and running at http://localhost:4200"
+
+      - name: Run Cypress tests
+        run: |
+          cd expenses-fe
+          npx cypress run
+        env:
+          CYPRESS_BASE_URL: http://localhost:4200
+
+      - name: Upload Cypress screenshots
+        if: failure()
+        uses: actions/upload-artifact@v3
+        with:
+          name: cypress-screenshots
+          path: expenses-fe/cypress/screenshots
