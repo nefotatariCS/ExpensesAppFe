@@ -1,9 +1,10 @@
-name: Prettier Formatting
+name: Prettier Formatting Frontend
 
 on:
   push:
 permissions:
-  contents: write  # Allow write access to repository contents  
+  contents: write # Allow write access to repository contents
+
 jobs:
   prettier:
     runs-on: ubuntu-latest
@@ -15,20 +16,10 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: "18"
-
-      - name: Install Dependencies
-        run: |
-          pwd
-          cd expenses-be
-          npm install
-
-      - name: Run Prettier
-        run: npx prettier --write .
+          node-version: '18'
 
       - name: Install frontend dependencies
         run: |
-          pwd
           cd expenses-fe
           npm install
 
@@ -36,10 +27,16 @@ jobs:
         run: |
           npm install -g @angular/cli
 
+      - name: Run Prettier
+        run: |
+          cd expenses-fe
+          npx prettier --write .
+
       - name: Check for changes
         env:
-            GITHUB_TOKEN: ${{ secrets.WORKFLOW_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.WORKFLOW_TOKEN }}
         run: |
+          cd expenses-fe
           git config --global user.name "GitHub Actions"
           git config --global user.email "actions@github.com"
           git add .
@@ -48,4 +45,3 @@ jobs:
           else
             git commit -m "Apply Prettier formatting"
             git push origin HEAD:$GITHUB_REF_NAME
-          fi

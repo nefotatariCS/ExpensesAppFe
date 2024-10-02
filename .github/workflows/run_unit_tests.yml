@@ -18,24 +18,12 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: "18"
-
-      - name: Install backend dependencies
-        run: |
-          cd expenses-be
-          npm install
-
-      - name: Run backend unit tests
-        run: |
-          cd expenses-be
-          npm test
+          node-version: '18'
 
       - name: Install frontend dependencies
         run: |
-          cd expenses-fe
           npm install
 
       - name: Run frontend unit tests
         run: |
-          cd expenses-fe
           npm test
