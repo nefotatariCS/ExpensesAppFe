@@ -28,7 +28,6 @@ jobs:
 
       - name: Run Prettier
         run: |
-          cd expenses-fe
           npx prettier --write .
 
       - name: Check for changes
