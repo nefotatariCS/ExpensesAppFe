@@ -1,12 +1,15 @@
 name: End-to-end tests
 on:
   workflow_run:
-    workflows: ["Deploy Frontend App"]  
+    workflows: ["Deploy Frontend App"]
     types:
       - completed
+  repository_dispatch:  # Listen for external triggers
+    types: [deploy-backend-trigger]  # Custom event name from backendapp
+
 jobs:
   cypress-run:
-    if: ${{ github.event.workflow_run.conclusion == 'success' }}  # Only run if unit tests are successful
+    if: ${{ github.event.workflow_run.conclusion == 'success' || github.event_name == 'repository_dispatch' }}
     runs-on: ubuntu-22.04
     steps:
       - name: Checkout
