@@ -1,7 +1,12 @@
 name: End-to-end tests
-on: push
+on:
+  workflow_run:
+    workflows: ["Deploy Frontend App"]  
+    types:
+      - completed
 jobs:
   cypress-run:
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}  # Only run if unit tests are successful
     runs-on: ubuntu-22.04
     steps:
       - name: Checkout
