@@ -1,7 +1,7 @@
 describe('Add New User', () => {
   it('should navigate to the Users page and create a new user', () => {
     cy.visit('/');
-    cy.login(Cypress.env("username"), Cypress.env("password"));
+    cy.login(Cypress.env('username'), Cypress.env('password'));
     cy.contains('Users').click();
     cy.contains('Add New User').click();
 

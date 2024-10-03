@@ -1,7 +1,7 @@
 describe('Add and Edit Expense', () => {
   it('should add a new expense and then edit it', () => {
     cy.visit('/');
-    cy.login(Cypress.env("username"), Cypress.env("password"));
+    cy.login(Cypress.env('username'), Cypress.env('password'));
     cy.get('button').contains('Edit').first().click();
 
     cy.get('#description').clear().type('Updated Description');
