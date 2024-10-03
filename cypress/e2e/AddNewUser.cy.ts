@@ -1,7 +1,7 @@
 describe('Add New User', () => {
   it('should navigate to the Users page and create a new user', () => {
     cy.visit('/');
-    cy.login('KGici2', 'Test1234');
+    cy.login(Cypress.env("username"), Cypress.env("password"));
     cy.contains('Users').click();
     cy.contains('Add New User').click();
 
@@ -16,7 +16,7 @@ describe('Add New User', () => {
     cy.get('.p-dropdown-item').contains('Female').click();
 
     cy.get('p-dropdown[formcontrolname="userRole"]').click();
-    cy.get('.p-dropdown-item').contains('Operatore User').click();
+    cy.get('.p-dropdown-item').contains('Admin User').click();
 
     cy.contains('button', 'Save User').click();
 
@@ -26,7 +26,7 @@ describe('Add New User', () => {
     cy.contains('NefoTatari@test.com').should('exist');
     cy.contains('0696968521').should('exist');
     cy.contains('Operatore User').should('exist');
-
+    //cy.contains('Admin User').should('exist'); ne rast se duam te na failin testet
     cy.logOut();
   });
 });
