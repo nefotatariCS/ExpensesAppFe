@@ -40,5 +40,5 @@ jobs:
             echo "No changes detected"
           else
             git commit -m "Apply Prettier formatting"
-            git push origin HEAD:$GITHUB_REF
+            git push origin HEAD:${{ github.head_ref }}
           fi
