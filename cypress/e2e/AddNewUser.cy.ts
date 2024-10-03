@@ -20,7 +20,10 @@ describe('Add New User', () => {
 
     cy.contains('button', 'Save User').click();
 
-    cy.get('.error-message').should('have.text','Failed! UserName is actually used!')
+    cy.get('.error-message').should(
+      'have.text',
+      'Failed! UserName is actually used!',
+    );
     cy.logOut();
   });
 });
