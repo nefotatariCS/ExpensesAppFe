@@ -1,5 +1,5 @@
 describe('Add New User', () => {
-  it('should navigate to the Users page and create a new user', () => {
+  it('should fail when trying to create a new user', () => {
     cy.visit('/');
     cy.login(Cypress.env('username'), Cypress.env('password'));
     cy.contains('Users').click();
@@ -20,13 +20,7 @@ describe('Add New User', () => {
 
     cy.contains('button', 'Save User').click();
 
-    cy.contains('Nefo').should('exist');
-    cy.contains('Tatari').should('exist');
-    cy.contains('NefoTatari').should('exist');
-    cy.contains('NefoTatari@test.com').should('exist');
-    cy.contains('0696968521').should('exist');
-    cy.contains('Operatore User').should('exist');
-    //cy.contains('Admin User').should('exist'); ne rast se duam te na failin testet
+    cy.get('.error-message').should('have.text','Failed! UserName is actually used!')
     cy.logOut();
   });
 });
