@@ -40,5 +40,6 @@ jobs:
             echo "No changes detected"
           else
             git commit -m "Apply Prettier formatting"
-            git push origin HEAD:${{ github.head_ref }}
+             git pull origin ${{ github.head_ref }}  # Pull the latest changes
+             git push origin HEAD:${{ github.head_ref }}  # Push to the branch of the PR
           fi
