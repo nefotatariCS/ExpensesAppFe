@@ -1,7 +1,6 @@
 name: Prettier Formatting Frontend
-
 on:
-  push:
+  pull_request:
 permissions:
   contents: write # Allow write access to repository contents
 
