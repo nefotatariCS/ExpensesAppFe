@@ -1,7 +1,7 @@
 describe('Add and Edit Expense', () => {
   it('should add a new expense and then edit it', () => {
     cy.visit('/');
-    cy.login('KGici2', 'Test1234');
+    cy.login(Cypress.env('username'), Cypress.env('password'));
     cy.get('button').contains('Edit').first().click();
 
     cy.get('#description').clear().type('Updated Description');
@@ -9,7 +9,7 @@ describe('Add and Edit Expense', () => {
     cy.get('#amount').clear().type('180');
 
     cy.get('#transactionDate').click();
-    cy.get('[ng-reflect-label="Today"]').click();
+    cy.get('button span').contains('Today').click();
 
     cy.contains('button', 'Save').click();
 
