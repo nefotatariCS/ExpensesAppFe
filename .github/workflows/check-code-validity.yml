@@ -2,7 +2,7 @@ name: Prettier Formatting Frontend
 on:
   pull_request:
 permissions:
-  contents: write
+  contents: write # Allow write access to repository contents
 
 jobs:
   prettier:
