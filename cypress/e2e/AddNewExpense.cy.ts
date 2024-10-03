@@ -1,7 +1,7 @@
 describe('Add New Expense', () => {
   it('should add a new expense', () => {
     cy.visit('/');
-    cy.login(Cypress.env("username"), Cypress.env("password"));
+    cy.login(Cypress.env('username'), Cypress.env('password'));
     cy.contains('Add New Expense').click();
 
     cy.get('#description').should('exist').type('Shpenzim Random');
