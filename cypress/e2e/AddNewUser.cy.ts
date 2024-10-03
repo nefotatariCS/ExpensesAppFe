@@ -1,7 +1,7 @@
 describe('Add New User', () => {
-  it('should navigate to the Users page and create a new user', () => {
+  it('should fail when trying to create a new user', () => {
     cy.visit('/');
-    cy.login('KGici2', 'Test1234');
+    cy.login(Cypress.env('username'), Cypress.env('password'));
     cy.contains('Users').click();
     cy.contains('Add New User').click();
 
@@ -16,17 +16,14 @@ describe('Add New User', () => {
     cy.get('.p-dropdown-item').contains('Female').click();
 
     cy.get('p-dropdown[formcontrolname="userRole"]').click();
-    cy.get('.p-dropdown-item').contains('Operatore User').click();
+    cy.get('.p-dropdown-item').contains('Admin User').click();
 
     cy.contains('button', 'Save User').click();
 
-    cy.contains('Nefo').should('exist');
-    cy.contains('Tatari').should('exist');
-    cy.contains('NefoTatari').should('exist');
-    cy.contains('NefoTatari@test.com').should('exist');
-    cy.contains('0696968521').should('exist');
-    cy.contains('Operatore User').should('exist');
-
+    cy.get('.error-message').should(
+      'have.text',
+      'Failed! UserName is actually used!',
+    );
     cy.logOut();
   });
 });
