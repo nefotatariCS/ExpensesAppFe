@@ -1,3 +1,4 @@
 # Ignore all YAML files
 **/*.yml
 server.js
+**/*.sh

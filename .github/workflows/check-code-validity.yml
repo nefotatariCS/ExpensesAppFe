@@ -20,7 +20,7 @@ jobs:
 
       - name: Install frontend dependencies
         run: |
-          npm ci
+          npm install
 
       - name: Install Angular CLI
         run: |
