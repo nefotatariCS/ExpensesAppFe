@@ -2,7 +2,7 @@ name: Prettier Formatting Frontend
 on:
   pull_request:
 permissions:
-  contents: write # Allow write access to repository contents
+  contents: write
 
 jobs:
   prettier:
@@ -31,7 +31,7 @@ jobs:
 
       - name: Check for changes and push if needed
         env:
-            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+            GITHUB_TOKEN: ${{ secrets.WORKFLOW_TOKEN }}
         run: |
           git config --global user.name "GitHub Actions"
           git config --global user.email "actions@github.com"
