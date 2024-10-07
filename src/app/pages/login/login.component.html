@@ -20,7 +20,7 @@
           ngClass="{ 'is-invalid': submitted && form.password.errors }"
         />
       </div>
-      <button [disabled]="loading" class="btn btn-primary">
+      <button [disabled]="loading" id="loginButton" class="btn btn-primary">
         <span
           *ngIf="loading"
           class="spinner-border spinner-border-sm mr-1"
