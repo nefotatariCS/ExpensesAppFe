@@ -5,7 +5,7 @@ permissions:
   contents: write
 
 jobs:
-  format:
+  prettier:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
