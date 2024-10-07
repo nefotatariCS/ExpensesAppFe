@@ -11,7 +11,7 @@ describe('template spec', () => {
     cy.visit('/');
     cy.login(Cypress.env('username'), Cypress.env('password'));
 cy.get('#loginButton').should('have.css','background-color')
-  .and('eq', '#de8724')
+  .and('eq', '#2aa538')
     cy.logOut();
   });
 });
