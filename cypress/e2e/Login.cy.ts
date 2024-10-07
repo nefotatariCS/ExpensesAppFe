@@ -7,4 +7,11 @@ describe('template spec', () => {
 
     cy.logOut();
   });
+  it('ensures that button color is orange', () => {
+    cy.visit('/');
+    cy.login(Cypress.env('username'), Cypress.env('password'));
+cy.get('#loginButton').should('have.css','background-color')
+  .and('eq', '#de8724')
+    cy.logOut();
+  });
 });
