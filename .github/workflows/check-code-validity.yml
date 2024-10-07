@@ -41,7 +41,6 @@ jobs:
             echo "No changes detected"
           else
             git commit -m "Apply Prettier formatting"
-            # Extract branch name from GITHUB_REF
-            BRANCH_NAME=$(echo "${GITHUB_REF#refs/heads/}")
-            git push origin HEAD:$BRANCH_NAME
+            # Use GITHUB_HEAD_REF for the correct source branch
+            git push origin HEAD:${GITHUB_HEAD_REF}
           fi
