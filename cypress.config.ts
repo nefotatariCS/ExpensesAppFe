@@ -2,7 +2,7 @@ import { defineConfig } from 'cypress';
 
 export default defineConfig({
   e2e: {
-    baseUrl: 'https://expenses-app-fe-25c80f8c3c72.herokuapp.com/',
+    baseUrl: 'https://expenses-app-frontend-18c65f34b93b.herokuapp.com/',
     env: {
       username: 'KGici',
       password: 'Test1234',
