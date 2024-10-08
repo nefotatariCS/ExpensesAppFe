@@ -12,7 +12,7 @@ describe('template spec', () => {
     cy.login(Cypress.env('username'), Cypress.env('password'));
     cy.get('#loginButton')
       .should('have.css', 'background-color')
-      .and('eq', '#2aa538');
+      .and('eq', '#2aa538'); //This should fail
     cy.logOut();
   });
 });
