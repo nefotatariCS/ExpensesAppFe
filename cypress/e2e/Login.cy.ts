@@ -1,5 +1,5 @@
 describe('template spec', () => {
-  it('passes', () => {
+  it('should pass', () => {
     cy.intercept('POST', '**/api/auth/signIn').as('login');
     cy.visit('/');
     cy.login(Cypress.env('username'), Cypress.env('password'));
