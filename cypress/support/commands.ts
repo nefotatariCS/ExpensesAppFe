@@ -42,7 +42,7 @@ declare namespace Cypress {
   }
 }
 Cypress.Commands.add('login', (userName, pass) => {
-  cy.get('h4').contains('Expeses Software').should('exist');
+  cy.get('h4').contains('Expeses App').should('exist');
   cy.get('[formcontrolname="userName"]').should('exist').type(userName);
   cy.get('[formcontrolname="password"]').should('exist').type(pass);
   cy.get('button').contains('Log In').click();
