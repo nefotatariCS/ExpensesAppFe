@@ -1,11 +1,9 @@
 name: Deploy Frontend App
 
 on:
-  pull_request:
+  push:
     branches:
       - main
-    types:
-      - closed
 jobs:
   deploy-frontend:
     runs-on: ubuntu-latest
